@@ -1,13 +1,12 @@
 # generate key for super cezar
-# generowanie klucza podstawowego (24064 x 2B = 48128B)
-# klucz podstawowy ma 24064 unikatowych układów zapisanych na 16 bitach (z 65 536 możliwych)
-# po 256 układów na każdy z 94 legalnych znakow
-# nielegalne znaki są omijane,
+# generating basic key (24064 x 2B = 48128B)
+# basic key have got 24064 unique sets saved at 16 bits (from 65 536 posibilities)
+# 256 sets per 94 legal signs
 
 import random
 import os.path
 
-combinaltions = 256
+combinaltions = 256 # 94 * 256 = 24064
 legal_chars = 94 # ASCII 33-126
 
 # warning, do not try to print !!
@@ -19,7 +18,7 @@ def _generate_unique_list(amountElements=24064,rangeElements=(0,65536),seed=None
     return uniqueList
 
 
-def create_keys(ascii_range = (33,126),lseeds = []):
+def create_keys_files(ascii_range = (33,126), lseeds = []):
     if ascii_range[0] < 0 or ascii_range[1] > 255:
         raise Exception("not byte for ASCII")
     if ascii_range[1] < ascii_range[0]:
@@ -52,8 +51,27 @@ def create_keys(ascii_range = (33,126),lseeds = []):
 
     print("done")
 
-        
-create_keys()
+
+def create_prime_key_file(seed=None):
+    npath = "Keys/"
+    if not os.path.exists(os.path.dirname(npath)):
+        try:
+            os.makedirs(os.path.dirname(npath))
+        except OSError as exc:  # Guard against race condition
+            print("directory can not be created !")
+
+
+    nameOfFile = npath + "prime_key.pkey"
+    with open(nameOfFile, 'w') as KeyFile:
+        KeyFile.write(str(_generate_unique_list(seed=seed)) + str('\n'))
+
+    print("done")
+
+
+
+if __name__ == "__main__":
+    create_keys_files()
+    create_prime_key_file()
         
             
     
