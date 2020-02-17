@@ -5,11 +5,15 @@
 
 import random
 import os.path
+import _decors
+from ready_to_use import pop_string
+from ready_to_use import conv_str2dict
 
 combinaltions = 256 # 94 * 256 = 24064
 legal_chars = 94 # ASCII 33-126
 
 # warning, do not try to print !!
+@_decors.dcrt_ascii_list2dic # that decorator provide return dict instead of list.
 def _generate_unique_list(amountElements=24064,rangeElements=(0,65536),seed=None):
     population = list(range(rangeElements[0],rangeElements[1]))
     k = amountElements
@@ -67,11 +71,41 @@ def create_prime_key_file(seed=None):
 
     print("done")
 
+def save_key_into_memory(path,isPrimeKey=False):
+    nameOfFile = path
+    rawKey = ""
+    with open(nameOfFile, 'r') as KeyFile:
+        rawKey = str(KeyFile.read())
+    
+    mainKey = ''
+    if not isPrimeKey:
+        mainKey, rawKey = pop_string(rawKey,0)
+        
+    newDict = conv_str2dict(rawKey)
+    
+    return mainKey, newDict
+
 
 
 if __name__ == "__main__":
-    create_keys_files()
-    create_prime_key_file()
+    
+    # CREATING KEYS
+    '''create_keys_files()
+    create_prime_key_file()'''
+
+    # SAVING KEYS
+    '''primeKeyPath = "Keys/prime_key.pkey"
+    sign, nd = save_key_into_memory(primeKeyPath,True)
+    print(sign,nd['x'])
+    listOfDicts = []
+    for e in range(33,127):
+        uniqueKeyPath = "Keys/unique_key_"+str(e)+".key" 
+        sign, nd = save_key_into_memory(uniqueKeyPath,False)
+        if chr(e) == sign:
+            listOfDicts.append(nd)
+        else:
+            raise Exception("Not perfect")
+    print(listOfDicts[ord('G')]['='])'''
         
             
     
