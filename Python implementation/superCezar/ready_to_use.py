@@ -51,7 +51,7 @@ def split_number2four_bytes_numbers(number):
     return list4BytesNumbers
 
 
-print(conv_dec2four_byte_bin(8))
+#print(conv_dec2four_byte_bin(8))
 
-print(split_number2four_bytes_numbers(0x0000000f0000000f))
+#print(split_number2four_bytes_numbers(0x0000000f0000000f))
 
