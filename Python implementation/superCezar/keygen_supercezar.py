@@ -157,5 +157,17 @@ if __name__ == "__main__":
     #print(mycode)
     listOfDictionary = reproduce_key(code = mycode)'''
         
-            
+    # SMALL KEY
+
+
+
+
+
+
+
+
+
+
+
+    #
     
