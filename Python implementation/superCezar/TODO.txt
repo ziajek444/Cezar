@@ -1,0 +1,2 @@
+Restructure:
+  Made Super Cezar a class
